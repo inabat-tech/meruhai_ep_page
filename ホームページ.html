@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>める配くん エンタープライズ版 - 大規模ビジネス向けメール配信システム</title>
+    <style>
+        /* 基本スタイル */
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+            line-height: 1.8; /* 行間を広げ、読みやすく */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f8fbfd; /* やや青みがかった白 */
+        }
+        .container {
+            max-width: 1100px; /* 少し広めに */
+            margin: 0 auto;
+            padding: 0 30px; /* 左右の余白を確保 */
+        }
+        /* ヘッダー */
+        header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            border-bottom: 3px solid #0A2E5B; /* 深いブルー */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0A2E5B; /* 深いブルー */
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .logo img {
+            height: 35px; /* ロゴの高さ調整 */
+            margin-right: 10px;
+        }
+        /* ナビゲーション */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* 右寄せ */
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #0A2E5B; /* ホバーでメインカラーに */
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 80px 0; /* 上下の余白を広めに */
+            text-align: center;
+            position: relative;
+        }
+        section:nth-of-type(even) { /* 偶数番目のセクションの背景色 */
+            background-color: #eef4f9; /* 淡いグレーブルー */
+        }
+        h2 {
+            font-size: 38px;
+            color: #0A2E5B; /* 深いブルー */
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        h2::after { /* 下線 */
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #FFB300; /* アクセントカラー（ゴールド系） */
+            margin: 10px auto 0;
+        }
+        h3 {
+            font-size: 28px;
+            color: #2c3e50; /* 少し濃いグレー */
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 17px;
+            color: #444;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        /* CTAボタン */
+        .cta-button {
+            display: inline-block;
+            background-color: #FFB300; /* アクセントカラー（ゴールド系） */
+            color: #0A2E5B; /* テキストは深いブルー */
+            padding: 18px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,179,0,0.3);
+        }
+        .cta-button:hover {
+            background-color: #e6a200; /* 少し濃く */
+            color: white; /* ホバー時は白文字 */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,179,0,0.4);
+        }
+        /* ヒーローセクション */
+        #hero {
+            background: linear-gradient(to right, #0A2E5B, #1A4D8C); /* グラデーション */
+            color: white;
+            padding: 120px 0;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        #hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #hero .text-content {
+            width: 55%;
+            z-index: 1;
+        }
+        #hero .main-copy {
+            font-size: 48px;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 25px;
+        }
+        #hero .main-copy strong {
+            color: #FFB300; /* アクセントカラー */
+        }
+        #hero .sub-copy {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 50px;
+            max-width: 100%;
+        }
+        #hero .image-content {
+            width: 40%;
+            text-align: right;
+        }
+        #hero .image-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* 特徴リスト */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 2カラム */
+            gap: 40px;
+            margin-top: 60px;
+            text-align: left;
+        }
+        .feature-item {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e6ec;
+            display: flex;
+            align-items: flex-start;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+        .feature-item .icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .feature-item .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .feature-item h3 {
+            font-size: 22px;
+            color: #0A2E5B;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .feature-item p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 0;
+        }
+
+        /* 機能テーブル */
+        .function-table {
+            width: 100%;
+            margin: 60px auto;
+            border-collapse: separate; /* ボーダーのスタイルを独立させる */
+            border-spacing: 0;
+            text-align: left;
+            border-radius: 10px;
+            overflow: hidden; /* 角丸を適用 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .function-table th, .function-table td {
+            border-bottom: 1px solid #e0e6ec;
+            padding: 20px;
+        }
+        .function-table thead tr {
+            background-color: #0A2E5B; /* ヘッダーの背景色 */
+            color: white;
+        }
+        .function-table th {
+            font-size: 18px;
+            font-weight: 600;
+            width: 30%;
+        }
+        .function-table td {
+            background-color: #ffffff;
+            font-size: 16px;
+            color: #444;
+        }
+        .function-table tbody tr:last-child td {
+            border-bottom: none; /* 最後の行の下線はなし */
+        }
+        .function-table td strong {
+            color: #0A2E5B;
+        }
+
+        /* サポートセクション */
+        #support .support-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        #support .support-text {
+            width: 55%;
+            text-align: left;
+        }
+        #support .support-image {
+            width: 40%;
+        }
+        #support .support-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #support ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 30px;
+        }
+        #support ul li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font-size: 17px;
+            color: #444;
+        }
+        #support ul li::before {
+            content: '✓'; /* チェックマーク */
+            position: absolute;
+            left: 0;
+            color: #FFB300; /* アクセントカラー */
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* クロージングCTA */
+        #contact {
+            background: linear-gradient(to right, #0A2E5B, #1A4D8C); /* ヒーローと同じグラデーション */
+            color: white;
+            padding: 100px 0;
+        }
+        #contact h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+        #contact h2::after {
+             background-color: #FFB300;
+        }
+        #contact p {
+            color: #e0e0e0;
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* フッター */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 15px;
+        }
+        footer a {
+            color: #FFB300;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo">
+                <img src="https://via.placeholder.com/40x40/0A2E5B/FFFFFF?text=ロゴ" alt="める配くん ロゴ">
+                める配くん <span style="font-size: 18px; font-weight: normal;">エンタープライズ版</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#reasons">選ばれる理由</a></li>
+                    <li><a href="#features">機能</a></li>
+                    <li><a href="#support">サポート</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <div class="text-content">
+                <p class="main-copy">大量・高速配信と高セキュリティ。<br>大規模ビジネスに**<strong style="color: #FFB300;">「確かな成果」</strong>**をもたらすメール配信システム</p>
+                <p class="sub-copy">5万件以上の安定配信と、DKIM・DMARK対応、二要素認証などの強固なセキュリティを両立。<br>貴社のシステム環境に合わせた最適なメールインフラをご提供します。</p>
+                <a href="#contact" class="cta-button">オンライン営業ミーティング（無料）を予約する</a>
+            </div>
+            <div class="image-content">
+                <img src="https://via.placeholder.com/500x350/1A4D8C/FFFFFF?text=ビジネスシーンイメージ" alt="ビジネスシーンのイメージ">
+            </div>
+        </div>
+    </section>
+
+    <section id="reasons">
+        <div class="container">
+            <h2>大企業・大規模運用で「める配くん」が選ばれる理由</h2>
+            <p>貴社のメールマーケティングにおける「大量配信時の到達率」「セキュリティ懸念」「システム連携」といった、大規模組織特有の課題を解決し、ビジネスの成果を最大化します。</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="icon"><img src="https://via.placeholder.com/60x60/FFB300/0A2E5B?text=✓" alt="チェックアイコン"></div>
+                    <div>
+                        <h3>多数の大企業での導入実績</h3>
+                        <p>厳格なセキュリティ基準や安定性を求める多数の大企業にご利用いただき、その信頼性を証明しています。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon"><img src="https://via.placeholder.com/60x60/FFB300/0A2E5B?text=🚀" alt="ロケットアイコン"></div>
+                    <div>
+                        <h3>圧倒的な到達率を実現するIP分散配信</h3>
+                        <p>高度なIP分散配信技術により、配信元の評価を安定させ、大量のメールを遅延なく確実にエンドユーザーに届けます。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon"><img src="https://via.placeholder.com/60x60/FFB300/0A2E5B?text=🔒" alt="鍵アイコン"></div>
+                    <div>
+                        <h3>強固なセキュリティ体制（二要素認証対応）</h3>
+                        <p>二要素認証をはじめとする厳重な認証機能で貴社の大切なデータを保護。導入社様の**セキュリティシートへの個別対応**も可能です。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon"><img src="https://via.placeholder.com/60x60/FFB300/0A2E5B?text=🛡️" alt="盾アイコン"></div>
+                    <div>
+                        <h3>最新の迷惑メール対策に完全対応</h3>
+                        <p>DKIM、DMARKといった最新の認証技術に対応し、メールの信頼性を担保。送信元詐称やフィッシング対策も万全です。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <h2>大規模運用に必須の機能と高い拡張性</h2>
+            <p>貴社のビジネスを加速させるために必要な、エンタープライズレベルの機能と柔軟な連携オプションを提供します。</p>
+            
+            <table class="function-table">
+                <thead>
+                    <tr>
+                        <th>機能カテゴリ</th>
+                        <th>提供機能と特長</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>配信規模</th>
+                        <td>**配信数5万件以上対応**：ミッションクリティカルな大量メール配信を安定かつ高速で実行できるインフラを提供します。</td>
+                    </tr>
+                    <tr>
+                        <th>連携機能</th>
+                        <td>**各種システム連携（API / kintone / WordPress）**：貴社の基幹システム、CRM、CMSなどとの柔軟な連携を可能にし、業務効率を最大化します。</td>
+                    </tr>
+                    <tr>
+                        <th>マーケティング</th>
+                        <td>**ステップメール機能**：顧客の行動履歴や登録情報に応じた、パーソナライズされたきめ細やかな自動フォローアップを実現し、顧客エンゲージメントを高めます。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="support">
+        <div class="container">
+            <h2>専任スタッフによる万全の導入・運用サポート</h2>
+            <div class="support-content">
+                <div class="support-text">
+                    <p>める配くんエンタープライズ版では、大規模なメールシステム移行や複雑な設定にも対応できる、手厚いサポート体制をご用意しております。</p>
+                    <ul>
+                        <li>**専任スタッフによるオンボーディング**：導入時の複雑な初期設定やデータ移行、システム連携など、専門スタッフが貴社の状況に合わせてきめ細かくサポートし、スムーズな運用開始を支援します。</li>
+                        <li>**充実した運用サポート**：導入後も、専任担当者による定常的なサポートや技術的なご相談に対応。貴社のメールマーケティングを継続的にバックアップします。</li>
+                    </ul>
+                </div>
+                <div class="support-image">
+                    <img src="https://via.placeholder.com/450x300/eef4f9/0A2E5B?text=サポートイメージ" alt="サポートチームのイメージ">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>貴社のビジネスに合わせた最適なプランをご提案します</h2>
+            <p>エンタープライズ版の詳細な機能、料金体系、貴社システムとの連携について、専門の担当者が個別にご説明させていただきます。まずはお気軽にご相談ください。</p>
+            <a href="#" class="cta-button">オンライン営業ミーティング（無料）を予約する</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 める配くん エンタープライズ版</p>
+            <p>
+                <a href="#">お問い合わせ</a> | 
+                <a href="#">資料請求</a> | 
+                <a href="https://www.meruhaikun.com" target="_blank">める配くんメインサイト</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
+```http://googleusercontent.com/image_generation_content/0
+
+ユーザー
+ありがとうございます。ロゴも「める配くん」でお願いします。
