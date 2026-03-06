@@ -4,154 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>める配プロプラン | 自動追客で「本顧客」へ導くメール配信</title>
+    <link rel="stylesheet" href="https://www.meruhaikun.com/common/css/common.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* テイストに合わせた基本スタイル */
+        /* LP専用の追加スタイル */
         :root {
             --primary-color: #005bac;
             --accent-color: #f39800;
             --bg-light: #f8f9fa;
-            --text-dark: #333;
         }
-        body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; line-height: 1.6; color: var(--text-dark); margin: 0; padding: 0; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; color: #333; line-height: 1.8; }
         
-        /* 共通ボタン */
-        .btn { display: inline-block; padding: 15px 40px; border-radius: 50px; font-weight: bold; text-decoration: none; transition: 0.3s; margin: 10px; cursor: pointer; border: none; }
-        .btn-trial { background: var(--accent-color); color: #fff; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(243, 152, 0, 0.4); }
-        .btn-mtg { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); font-size: 1.1rem; }
-        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+        /* 既存ヘッダーの微調整（LP用にシンプル化する場合） */
+        #header { background: #fff; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .nav-btn-group { display: flex; gap: 10px; }
+        
+        /* コンバージョンボタン */
+        .lp-btn { display: inline-block; padding: 18px 45px; border-radius: 50px; font-weight: bold; text-decoration: none; transition: 0.3s; margin: 10px; border: none; cursor: pointer; }
+        .lp-btn-trial { background: var(--accent-color); color: #fff; font-size: 1.3rem; box-shadow: 0 4px 15px rgba(243, 152, 0, 0.4); }
+        .lp-btn-mtg { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); font-size: 1.1rem; }
+        .lp-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        /* セクション共通 */
+        .lp-section { padding: 100px 0; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center; }
+        .section-title { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 50px; position: relative; padding-bottom: 15px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--accent-color); }
 
         /* メインビジュアル */
-        .hero { background: linear-gradient(135deg, #eef5ff 0%, #fff 100%); padding: 100px 0; text-align: center; }
-        .hero h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
-        .hero .sub-text { font-size: 1.2rem; margin-bottom: 40px; }
+        .hero { background: linear-gradient(135deg, #eef5ff 0%, #fff 100%); padding: 120px 0; }
+        .hero h1 { font-size: 2.8rem; color: var(--primary-color); line-height: 1.4; margin-bottom: 25px; }
+        .hero .sub-text { font-size: 1.3rem; color: #555; margin-bottom: 45px; }
 
-        /* 特徴セクション */
-        .features { padding: 80px 0; background: #fff; text-align: center; }
-        .section-title { font-size: 2rem; color: var(--primary-color); margin-bottom: 50px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { padding: 30px; border: 1px solid #ddd; border-radius: 10px; transition: 0.3s; }
-        .feature-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .feature-card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
+        /* 特徴カード */
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .feature-card { background: #fff; padding: 40px; border: 1px solid #e0e0e0; border-radius: 12px; transition: 0.3s; }
+        .feature-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .feature-card i { font-size: 3.5rem; color: var(--primary-color); margin-bottom: 25px; }
+        .feature-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #333; }
 
-        /* セキュリティ・実績（流用部分） */
-        .trust { padding: 80px 0; background: var(--bg-light); text-align: center; }
-        .logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 30px; opacity: 0.7; }
-        
-        /* 料金プラン */
-        .pricing { padding: 80px 0; text-align: center; }
-        .price-box { font-size: 2.5rem; color: var(--primary-color); font-weight: bold; }
-
-        /* フッター */
-        footer { background: #333; color: #fff; padding: 40px 0; text-align: center; }
+        /* 既存のフッター調整 */
+        #footer { background: #f4f4f4; padding: 60px 0 20px; border-top: 1px solid #ddd; }
+        .footer-content { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 2fr; gap: 40px; text-align: left; }
+        .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 0.9rem; }
+        .footer-links a { color: #666; text-decoration: none; }
+        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.8rem; color: #999; }
     </style>
 </head>
 <body>
 
-    <header style="padding: 20px; border-bottom: 1px solid #eee;">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="logo"><img src="https://www.meruhaikun.com/common/img/logo.png" alt="める配くん" height="40"></div>
-            <nav><a href="#price" style="text-decoration:none; color:var(--text-dark);">料金プラン</a></nav>
+    <header id="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="https://www.meruhaikun.com/">
+                    <img src="https://www.meruhaikun.com/common/img/logo.png" alt="める配くん" height="50">
+                </a>
+            </div>
+            <div class="nav-btn-group">
+                <a href="https://www.meruhaikun.com/trial/" class="lp-btn lp-btn-trial" style="padding: 10px 20px; font-size: 0.9rem; margin: 0;">無料トライアル</a>
+            </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
-            <h1>その「見込み客」、<br>プロプランなら「本顧客」まで導ける。</h1>
-            <p class="sub-text">複数の入り口（フォーム）× 自動追客（ステップメール）で、<br>「売れるチャンス」を自動でつくる。</p>
-            <div>
-                <a href="https://www.meruhaikun.com/trial/" class="btn btn-trial">今すぐ無料で始める</a>
-                <a href="#mtg" class="btn btn-mtg">オンラインMTGを予約する</a>
-            </div>
-            <p style="margin-top:20px; font-weight:bold;">累計2500社の実績を誇る「める配くん」から、待望の新プラン誕生！</p>
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">プロプランでできること</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fa-solid fa-list-check"></i>
-                    <h3>登録フォーム作成</h3>
-                    <p>用途に合わせて最適な登録フォームをいくつでも作成可能。セミナー申込や資料請求など、多彩な窓口を専門知識なしで構築できます。</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-envelope-open-text"></i>
-                    <h3>ステップメール配信</h3>
-                    <p>あらかじめ設定したスケジュールで自動配信。最適なタイミングで役立つ情報を届け、見込み客を「本顧客」へと引き上げます。</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-bullseye"></i>
-                    <h3>リターゲティング配信</h3>
-                    <p>メールを開封した人やURLをクリックした関心の高いユーザーだけに絞って再アプローチ。圧倒的に高い成約率を実現します。</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>複数ログイン</h3>
-                    <p>一つのアカウントに複数の担当者が同時ログイン可能。メンバーごとの権限設定で、安全かつ効率的な配信管理が行えます。</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-link"></i>
-                    <h3>kintone連携</h3>
-                    <p>kintone上の顧客情報を自動連携。最新のリストに対して、手間なくステップメールやリターゲティングを開始できます。</p>
-                </div>
+            <h1>その「見込み客」、<br>プロプランなら「本顧客」へ導ける。</h1>
+            <p class="sub-text">複数のフォーム作成 × 自動追客（ステップメール）で、<br>「成約のチャンス」を自動的に最大化します。</p>
+            <div class="cta-area">
+                <a href="https://www.meruhaikun.com/trial/" class="lp-btn lp-btn-trial">今すぐ無料で始める</a>
+                <a href="#mtg" class="lp-btn lp-btn-mtg">オンラインMTGを予約する</a>
             </div>
         </div>
     </section>
 
-    <section class="trust">
+    <section class="lp-section">
         <div class="container">
             <h2 class="section-title">プロプランが選ばれる理由</h2>
-            <div style="text-align: left; max-width: 800px; margin: 0 auto;">
-                <div style="margin-bottom: 40px;">
-                    <h3><i class="fa-solid fa-headset" style="color:var(--primary-color);"></i> 「困った」をすぐに解決。電話とメールで伴走します。</h3>
-                    <p>専門知識を持ったサポートデスクが、電話とメールで親切・丁寧に対応いたします。ツールの導入や運用で迷った際も安心です。</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-envelope-circle-check"></i>
+                    <h3>ステップメール</h3>
+                    <p>登録日から「3日後」「7日後」など、スケジュールに合わせて自動配信。最適なタイミングでのアプローチを自動化します。</p>
                 </div>
-                <div style="margin-bottom: 40px;">
-                    <h3><i class="fa-solid fa-yen-sign" style="color:var(--primary-color);"></i> 月額6,300円（税抜）〜で、本格的なマーケティングを。</h3>
-                    <p>高額なMAツールに引けを取らない機能を圧倒的低価格でご提供。これまで予算で断念していた「自動追客」を、める配価格で実現できます。</p>
-                </div>
-                <div style="margin-bottom: 40px;">
-                    <h3><i class="fa-solid fa-shield-halved" style="color:var(--primary-color);"></i> 大切な顧客データを守る、強固な保護システム。</h3>
-                    <p>SSL通信暗号化や内部漏洩対策を徹底。プライバシーマーク取得企業として、最高水準のセキュリティ環境を維持しています。</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 60px;">
-                <p>大手導入企業・IT review 高評価実績</p>
-                <div class="logos">
-                    <span>[Company A]</span><span>[Company B]</span><span>[Company C]</span><span>[Company D]</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="price" class="pricing">
-        <div class="container">
-            <h2 class="section-title">料金プラン</h2>
-            <div class="price-box">月額 6,500円（税抜）〜</div>
-            <p>※初期費用：10,000円（税抜）〜</p>
-            <div style="margin-top: 40px;">
-                <a href="https://www.meruhaikun.com/trial/" class="btn btn-trial">＼まずは2週間お試し／<br>今すぐ無料で始める</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="mtg" style="padding: 80px 0; background: var(--primary-color); color: #fff; text-align: center;">
-        <div class="container">
-            <h2>機能や活用方法を詳しく知りたい方へ</h2>
-            <p>専門スタッフがオンラインにて個別にご相談を承ります。</p>
-            <a href="#" class="btn" style="background:#fff; color:var(--primary-color); padding: 20px 60px; font-size: 1.3rem;">オンラインMTGを予約する</a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; Delightful Inc. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+                <div class="feature-card">
+                    <i class="fa-solid fa-window-restore"></i>
+                    <h3>複数フォーム作成</h3>
