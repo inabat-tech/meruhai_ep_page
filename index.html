@@ -15,14 +15,51 @@
         }
         body { font-family: 'Noto Sans JP', sans-serif; margin: 0; padding: 0; color: var(--text-main); line-height: 1.5; background: #fff; }
 
-        /* --- ヘッダー --- */
-        .site-header { background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; padding: 10px 0; }
-        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .header-logo img { height: 40px; }
-        .header-nav { display: flex; align-items: center; gap: 20px; }
-        .header-nav a { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: bold; }
-        .header-cta-top { background: var(--accent-orange); color: #fff !important; padding: 8px 15px; border-radius: 4px; }
 
+/* --- ヘッダー (image_dd3c49.png 再現) --- */
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo img { height: 45px; }
+        .header-nav { display: flex; align-items: center; gap: 15px; }
+        .header-nav a {
+            text-decoration: none;
+            color: var(--header-blue);
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .header-nav a i { font-size: 10px; }
+        .header-btns { display: flex; gap: 10px; margin-left: 15px; }
+        .btn-head {
+            padding: 8px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.1);
+        }
+        .btn-login { background-color: var(--header-blue); }
+        .btn-trial-head { background-color: var(--header-red); }
+
+
+
+
+        
         /* --- ファーストビュー --- */
         .fv { padding: 40px 20px; max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; }
         
@@ -80,16 +117,32 @@
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="header-container">
+    <!--ヘッダセクション　-->
+<header class="site-header">
+        <div class="container header-container">
             <div class="header-logo">
                 <a href="https://www.meruhaikun.com/"><img src="https://inabat-tech.github.io/meruhai_ep_page/logo_pro.png" alt="める配くん"></a>
             </div>
-            <nav class="header-nav">
-                <a href="https://www.meruhaikun.com/trial/" class="header-cta-top">無料トライアル</a>
-            </nav>
+            <div style="display: flex; align-items: center;">
+                <nav class="header-nav">
+                    <a href="#">める配くんとは <i class="fa-solid fa-chevron-down"></i></a>
+                    <a href="https://www.meruhaikun.com/price/">料金表</a>
+                    <a href="#">お申し込み <i class="fa-solid fa-chevron-down"></i></a>
+                    <a href="https://www.meruhaikun.com/function/">機能 <i class="fa-solid fa-chevron-down"></i></a>
+                    <a href="https://www.meruhaikun.com/faq/">よくある質問</a>
+                    <a href="https://www.meruhaikun.com/contact/">お問合せ</a>
+                    <a href="https://www.meruhaikun.com/download/">資料ダウンロード</a>
+                </nav>
+                <div class="header-btns">
+                    <a href="https://www.meruhaikun.com/login/" class="btn-head btn-login">ログイン</a>
+                    <a href="https://www.meruhaikun.com/trial/" class="btn-head btn-trial-head">無料トライアル</a>
+                </div>
+            </div>
         </div>
     </header>
+
+        <!--ヘッダセクション　-->
+
 
     <main class="fv">
         <div class="fv-left">
