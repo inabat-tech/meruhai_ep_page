@@ -3,90 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>める配プロプラン | 自動追客で「本顧客」へ導くメール配信</title>
-    <link rel="stylesheet" href="https://www.meruhaikun.com/common/css/common.css">
+    <title>める配プロプラン | 自動追客で成果を最大化</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        /* LP専用の追加スタイル */
+        /* 基本設定 */
         :root {
             --primary-color: #005bac;
             --accent-color: #f39800;
-            --bg-light: #f8f9fa;
+            --text-main: #333;
+            --bg-light: #f9f9f9;
         }
-        body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; color: #333; line-height: 1.8; }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            margin: 0; padding: 0; color: var(--text-main); line-height: 1.6;
+        }
+
+        /* --- ヘッダー（公式サイト再現版） --- */
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky; top: 0; z-index: 1000;
+            padding: 10px 0;
+        }
+        .header-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .header-logo img { height: 45px; vertical-align: middle; }
+        .header-nav { display: flex; align-items: center; gap: 20px; }
+        .header-nav a { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: bold; }
+        .header-nav a:hover { color: var(--primary-color); }
+        .header-cta {
+            background: var(--accent-color); color: #fff !important;
+            padding: 10px 20px; border-radius: 4px; transition: 0.3s;
+        }
+        .header-cta:hover { background: #d68500; }
+
+        /* --- メインコンテンツ（テイスト再現） --- */
+        .lp-hero {
+            background: linear-gradient(120deg, #f0f7ff 0%, #ffffff 100%);
+            padding: 100px 20px; text-align: center;
+        }
+        .lp-hero h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+        .lp-hero p { font-size: 1.2rem; margin-bottom: 40px; }
         
-        /* 既存ヘッダーの微調整（LP用にシンプル化する場合） */
-        #header { background: #fff; border-bottom: 1px solid #eee; padding: 10px 0; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-        .nav-btn-group { display: flex; gap: 10px; }
-        
-        /* コンバージョンボタン */
-        .lp-btn { display: inline-block; padding: 18px 45px; border-radius: 50px; font-weight: bold; text-decoration: none; transition: 0.3s; margin: 10px; border: none; cursor: pointer; }
-        .lp-btn-trial { background: var(--accent-color); color: #fff; font-size: 1.3rem; box-shadow: 0 4px 15px rgba(243, 152, 0, 0.4); }
-        .lp-btn-mtg { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); font-size: 1.1rem; }
-        .lp-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+        .btn-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn {
+            display: inline-block; padding: 20px 40px; border-radius: 50px;
+            text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: 0.3s;
+        }
+        .btn-trial { background: var(--accent-color); color: #fff; box-shadow: 0 4px 15px rgba(243, 152, 0, 0.3); }
+        .btn-mtg { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        .btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
         /* セクション共通 */
-        .lp-section { padding: 100px 0; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center; }
-        .section-title { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 50px; position: relative; padding-bottom: 15px; }
-        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--accent-color); }
+        section { padding: 80px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .sec-title { text-align: center; font-size: 2rem; color: var(--primary-color); margin-bottom: 50px; }
 
-        /* メインビジュアル */
-        .hero { background: linear-gradient(135deg, #eef5ff 0%, #fff 100%); padding: 120px 0; }
-        .hero h1 { font-size: 2.8rem; color: var(--primary-color); line-height: 1.4; margin-bottom: 25px; }
-        .hero .sub-text { font-size: 1.3rem; color: #555; margin-bottom: 45px; }
+        /* 特徴・機能 */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: #fff; padding: 30px; border-radius: 10px; border: 1px solid #eee; text-align: center; }
+        .card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
 
-        /* 特徴カード */
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .feature-card { background: #fff; padding: 40px; border: 1px solid #e0e0e0; border-radius: 12px; transition: 0.3s; }
-        .feature-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .feature-card i { font-size: 3.5rem; color: var(--primary-color); margin-bottom: 25px; }
-        .feature-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #333; }
+        /* --- フッター（公式サイト再現版） --- */
+        .site-footer {
+            background: #222; color: #fff; padding: 60px 20px 20px;
+        }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
+        }
+        .footer-col h4 { border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #ccc; text-decoration: none; font-size: 14px; }
+        .footer-col ul li a:hover { color: #fff; }
+        .copy { text-align: center; margin-top: 50px; font-size: 12px; color: #777; border-top: 1px solid #333; padding-top: 20px; }
 
-        /* 既存のフッター調整 */
-        #footer { background: #f4f4f4; padding: 60px 0 20px; border-top: 1px solid #ddd; }
-        .footer-content { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 2fr; gap: 40px; text-align: left; }
-        .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 0.9rem; }
-        .footer-links a { color: #666; text-decoration: none; }
-        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.8rem; color: #999; }
+        @media (max-width: 768px) {
+            .header-nav { display: none; } /* モバイル時は簡易化 */
+            .lp-hero h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 
-    <header id="header">
-        <div class="header-inner">
-            <div class="logo">
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-logo">
                 <a href="https://www.meruhaikun.com/">
-                    <img src="https://www.meruhaikun.com/common/img/logo.png" alt="める配くん" height="50">
+                    <img src="https://www.meruhaikun.com/common/img/logo.png" alt="める配くん">
                 </a>
             </div>
-            <div class="nav-btn-group">
-                <a href="https://www.meruhaikun.com/trial/" class="lp-btn lp-btn-trial" style="padding: 10px 20px; font-size: 0.9rem; margin: 0;">無料トライアル</a>
-            </div>
+            <nav class="header-nav">
+                <a href="https://www.meruhaikun.com/feature/">特徴</a>
+                <a href="https://www.meruhaikun.com/price/">料金表</a>
+                <a href="https://www.meruhaikun.com/case/">導入事例</a>
+                <a href="https://www.meruhaikun.com/trial/" class="header-cta">無料トライアル</a>
+            </nav>
         </div>
     </header>
 
-    <section class="hero">
+    <section class="lp-hero">
         <div class="container">
-            <h1>その「見込み客」、<br>プロプランなら「本顧客」へ導ける。</h1>
-            <p class="sub-text">複数のフォーム作成 × 自動追客（ステップメール）で、<br>「成約のチャンス」を自動的に最大化します。</p>
-            <div class="cta-area">
-                <a href="https://www.meruhaikun.com/trial/" class="lp-btn lp-btn-trial">今すぐ無料で始める</a>
-                <a href="#mtg" class="lp-btn lp-btn-mtg">オンラインMTGを予約する</a>
+            <h1>める配プロプランで<br>「見込み客」を逃さない自動追客を。</h1>
+            <p>ステップメール × kintone連携 × 複数フォーム作成<br>高機能なのに月額6,500円から始められる次世代メールマーケティング</p>
+            <div class="btn-group">
+                <a href="https://www.meruhaikun.com/trial/" class="btn btn-trial">14日間無料で試してみる</a>
+                <a href="#mtg" class="btn btn-mtg">オンライン相談を予約する</a>
             </div>
         </div>
     </section>
 
-    <section class="lp-section">
+    <section>
         <div class="container">
-            <h2 class="section-title">プロプランが選ばれる理由</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fa-solid fa-envelope-circle-check"></i>
+            <h2 class="sec-title">プロプランだけの強力な機能</h2>
+            <div class="grid">
+                <div class="card">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
                     <h3>ステップメール</h3>
-                    <p>登録日から「3日後」「7日後」など、スケジュールに合わせて自動配信。最適なタイミングでのアプローチを自動化します。</p>
+                    <p>ユーザーの行動に合わせて自動でメールを配信。最適なタイミングでアプローチし、成約率を向上させます。</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-window-restore"></i>
+                <div class="card">
+                    <i class="fa-solid fa-file-invoice"></i>
                     <h3>複数フォーム作成</h3>
+                    <p>セミナー、資料請求、アンケートなど、用途に合わせたフォームを無制限に作成。窓口別の顧客管理が可能です。</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-sync"></i>
+                    <h3>kintone連携</h3>
+                    <p>kintoneの顧客データとリアルタイム同期。二重管理の手間をなくし、最新リストへ即座に配信できます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>サービス紹介</h4>
+                <ul>
+                    <li><a href="https://www.meruhaikun.com/feature/">める配くんの特徴</a></li>
+                    <li><a href="https://www.meruhaikun.com/price/">料金プラン</a></li>
+                    <li><a href="https://www.meruhaikun.com/function/">機能一覧</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>サポート</h4>
+                <ul>
+                    <li><a href="https://www.meruhaikun.com/faq/">よくある質問</a></li>
+                    <li><a href="https://www.meruhaikun.com/manual/">操作マニュアル</a></li>
+                    <li><a href="https://www.meruhaikun.com/contact/">お問い合わせ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>会社情報</h4>
+                <ul>
+                    <li><a href="https://www.meruhaikun.com/company/">運営会社</a></li>
+                    <li><a href="https://www.meruhaikun.com/privacy/">プライバシーポリシー</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy">
+            &copy; delightful Inc. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
