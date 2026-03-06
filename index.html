@@ -3,188 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>める配Pro | 50のフォームから、50の成約ストーリーを。</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>める配プロプラン | 自動追客で「本顧客」へ導くメール配信</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-blue: #0066cc; --accent-orange: #ff9900; }
-        body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; }
-        .bg-gradient-pro { background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%); }
-        .btn-trial { background-color: var(--accent-orange); transition: 0.3s; }
-        .btn-trial:hover { background-color: #e68a00; transform: translateY(-2px); }
+        /* テイストに合わせた基本スタイル */
+        :root {
+            --primary-color: #005bac;
+            --accent-color: #f39800;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+        }
+        body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; line-height: 1.6; color: var(--text-dark); margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         
-        /* 構造図のアニメーション設定 */
-        .flow-line { stroke-dasharray: 8; animation: dash 1s linear infinite; }
-        @keyframes dash { to { stroke-dashoffset: -16; } }
-        .mail-icon { animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        /* 共通ボタン */
+        .btn { display: inline-block; padding: 15px 40px; border-radius: 50px; font-weight: bold; text-decoration: none; transition: 0.3s; margin: 10px; cursor: pointer; border: none; }
+        .btn-trial { background: var(--accent-color); color: #fff; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(243, 152, 0, 0.4); }
+        .btn-mtg { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); font-size: 1.1rem; }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        /* メインビジュアル */
+        .hero { background: linear-gradient(135deg, #eef5ff 0%, #fff 100%); padding: 100px 0; text-align: center; }
+        .hero h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+        .hero .sub-text { font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* 特徴セクション */
+        .features { padding: 80px 0; background: #fff; text-align: center; }
+        .section-title { font-size: 2rem; color: var(--primary-color); margin-bottom: 50px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { padding: 30px; border: 1px solid #ddd; border-radius: 10px; transition: 0.3s; }
+        .feature-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .feature-card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
+
+        /* セキュリティ・実績（流用部分） */
+        .trust { padding: 80px 0; background: var(--bg-light); text-align: center; }
+        .logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 30px; opacity: 0.7; }
+        
+        /* 料金プラン */
+        .pricing { padding: 80px 0; text-align: center; }
+        .price-box { font-size: 2.5rem; color: var(--primary-color); font-weight: bold; }
+
+        /* フッター */
+        footer { background: #333; color: #fff; padding: 40px 0; text-align: center; }
     </style>
 </head>
-<body class="text-gray-800 antialiased">
+<body>
 
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <img src="logo_pro.png" alt="める配Pro" class="h-10 md:h-12">
-            <nav class="hidden lg:flex items-center space-x-6 text-sm font-bold">
-                <a href="#about" class="hover:text-blue-600">める配Proとは</a>
-                <a href="#features" class="hover:text-blue-600">機能</a>
-                <a href="#price" class="hover:text-blue-600">料金</a>
-                <div class="h-6 w-px bg-gray-300 mx-2"></div>
-                <a href="#" class="btn-trial text-white px-5 py-2 rounded-full shadow-md">無料トライアル</a>
-            </nav>
+    <header style="padding: 20px; border-bottom: 1px solid #eee;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo"><img src="https://www.meruhaikun.com/common/img/logo.png" alt="める配くん" height="40"></div>
+            <nav><a href="#price" style="text-decoration:none; color:var(--text-dark);">料金プラン</a></nav>
         </div>
     </header>
 
-    <section class="bg-gradient-pro py-12 md:py-20 border-b overflow-hidden">
-        <div class="container mx-auto px-4 text-center">
-            <div class="mb-12">
-                <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
-                    50のフォームから、<br><span class="text-blue-600">50の成約ストーリーを。</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-600 font-bold">
-                    最小プランから50フォーム作成可能。<br>
-                    フォーム別ステップメールと連動する「メール配信システムの進化形」。
-                </p>
+    <section class="hero">
+        <div class="container">
+            <h1>その「見込み客」、<br>プロプランなら「本顧客」まで導ける。</h1>
+            <p class="sub-text">複数の入り口（フォーム）× 自動追客（ステップメール）で、<br>「売れるチャンス」を自動でつくる。</p>
+            <div>
+                <a href="https://www.meruhaikun.com/trial/" class="btn btn-trial">今すぐ無料で始める</a>
+                <a href="#mtg" class="btn btn-mtg">オンラインMTGを予約する</a>
             </div>
-
-            <div class="max-w-6xl mx-auto mb-16 relative bg-white/50 p-8 rounded-3xl border border-white shadow-sm">
-                <div class="grid grid-cols-12 gap-4 items-center">
-                    
-                    <div class="col-span-12 md:col-span-3 space-y-4">
-                        <div class="bg-white p-4 rounded-xl shadow-md border-2 border-blue-100 font-bold text-gray-700">Webフォーム A</div>
-                        <div class="bg-white p-4 rounded-xl shadow-md border-2 border-blue-100 font-bold text-gray-700">Webフォーム B</div>
-                        <div class="bg-white p-4 rounded-xl shadow-md border-2 border-blue-100 font-bold text-gray-700">Webフォーム C</div>
-                        <p class="text-xs text-blue-500 font-bold">最大50〜200個</p>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-4 flex flex-col items-center py-8">
-                        <div class="relative">
-                            <svg class="absolute -left-16 top-1/2 w-16 h-12 hidden md:block" viewBox="0 0 60 40">
-                                <path d="M0 20 L50 20" stroke="#0066cc" stroke-width="3" fill="none" class="flow-line"/>
-                                <polygon points="50,15 60,20 50,25" fill="#0066cc"/>
-                            </svg>
-                            
-                            <div class="w-40 h-48 bg-slate-100 border-4 border-slate-300 rounded-[40px] flex flex-col items-center justify-center shadow-inner relative">
-                                <img src="sampo_speaker.png" alt="キャラクター" class="w-20 h-20 rounded-full border-4 border-white shadow-lg mb-2 overflow-hidden object-cover">
-                                <p class="font-black text-slate-700">める配くん<br>PRO</p>
-                                <div class="absolute -top-4 -right-4 bg-orange-500 text-white text-[10px] px-2 py-1 rounded-full font-bold">2,000社突破</div>
-                            </div>
-
-                            <svg class="absolute -right-16 top-1/2 w-16 h-12 hidden md:block" viewBox="0 0 60 40">
-                                <path d="M0 20 L50 20" stroke="#0066cc" stroke-width="3" fill="none" class="flow-line"/>
-                                <polygon points="50,15 60,20 50,25" fill="#0066cc"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-5">
-                        <div class="flex justify-between mb-2 px-2">
-                            <span class="text-[10px] font-bold text-gray-400 italic">パーソナライズ</span>
-                            <span class="text-[10px] font-bold text-gray-400 italic">ステップメール</span>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-2">
-                                <div class="flex-1 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-100 shadow-sm"><i class="fas fa-envelope text-blue-400 mail-icon"></i></div>
-                                <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                <div class="flex-1 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-100 shadow-sm"><i class="fas fa-envelope text-blue-400 mail-icon"></i></div>
-                                <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                <div class="flex-1 h-12 bg-blue-600 rounded-lg flex items-center justify-center border border-blue-600 shadow-sm"><i class="fas fa-envelope text-white mail-icon"></i></div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="flex-1 h-12 bg-orange-50 rounded-lg flex items-center justify-center border border-orange-100 shadow-sm"><i class="fas fa-envelope text-orange-400 mail-icon"></i></div>
-                                <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                <div class="flex-1 h-12 bg-orange-600 rounded-lg flex items-center justify-center border border-orange-600 shadow-sm"><i class="fas fa-envelope text-white mail-icon"></i></div>
-                                <div class="flex-1"></div> </div>
-                            <div class="flex items-center space-x-2 opacity-60">
-                                <div class="flex-1 h-12 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200"><i class="fas fa-envelope text-slate-300"></i></div>
-                                <i class="fas fa-chevron-right text-gray-200 text-xs"></i>
-                                <div class="flex-1 h-12 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200"><i class="fas fa-envelope text-slate-300"></i></div>
-                                <i class="fas fa-chevron-right text-gray-200 text-xs"></i>
-                                <div class="flex-1 h-12 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200"><i class="fas fa-envelope text-slate-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="btn-trial text-white px-10 py-5 rounded-xl font-bold text-xl shadow-xl">無料トライアル（即日開始）</a>
-                <a href="#price" class="bg-white border-2 border-blue-600 text-blue-600 px-10 py-5 rounded-xl font-bold text-xl hover:bg-blue-50 transition">オンラインセミナー予約</a>
-            </div>
+            <p style="margin-top:20px; font-weight:bold;">累計2500社の実績を誇る「める配くん」から、待望の新プラン誕生！</p>
         </div>
     </section>
 
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-12">直感的に操作できる管理画面</h2>
-            <div class="max-w-5xl mx-auto rounded-2xl shadow-2xl overflow-hidden border">
-                <img src="meruhai_gamen.png" alt="登録フォーム一覧" class="w-full">
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="py-20 bg-slate-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">マーケティングを加速させるプロ機能</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
-                    <i class="fas fa-redo text-blue-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">リターゲティング機能</h4>
-                    <p class="text-sm text-gray-500">クリック者に絞った効率的な追客</p>
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">プロプランでできること</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h3>登録フォーム作成</h3>
+                    <p>用途に合わせて最適な登録フォームをいくつでも作成可能。セミナー申込や資料請求など、多彩な窓口を専門知識なしで構築できます。</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
-                    <i class="fas fa-comment-alt text-blue-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">SMS配信</h4>
-                    <p class="text-sm text-gray-500">開封率の高いSMSで確実にリーチ</p>
+                <div class="feature-card">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <h3>ステップメール配信</h3>
+                    <p>あらかじめ設定したスケジュールで自動配信。最適なタイミングで役立つ情報を届け、見込み客を「本顧客」へと引き上げます。</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
-                    <i class="fas fa-plug text-blue-600 text-3xl mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">外部システム連携</h4>
-                    <p class="text-sm text-gray-500">kintone, Googleシート連携対応</p>
+                <div class="feature-card">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <h3>リターゲティング配信</h3>
+                    <p>メールを開封した人やURLをクリックした関心の高いユーザーだけに絞って再アプローチ。圧倒的に高い成約率を実現します。</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>複数ログイン</h3>
+                    <p>一つのアカウントに複数の担当者が同時ログイン可能。メンバーごとの権限設定で、安全かつ効率的な配信管理が行えます。</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-link"></i>
+                    <h3>kintone連携</h3>
+                    <p>kintone上の顧客情報を自動連携。最新のリストに対して、手間なくステップメールやリターゲティングを開始できます。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="price" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="plan-card bg-white p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <h3 class="text-xl font-bold mb-2">プロ 7,000</h3>
-                    <div class="text-4xl font-black text-blue-600 mb-6">¥7,000 <span class="text-sm font-normal text-gray-400">/月</span></div>
-                    <ul class="text-left space-y-4 mb-8 text-sm">
-                        <li class="font-black text-blue-700"><i class="fas fa-wpforms mr-2"></i>フォーム数：50個</li>
-                        <li><i class="fas fa-users mr-2 text-blue-500"></i>登録アドレス：7,000</li>
-                    </ul>
-                    <a href="#" class="block w-full py-4 bg-slate-800 text-white rounded-xl font-bold">申し込む</a>
+    <section class="trust">
+        <div class="container">
+            <h2 class="section-title">プロプランが選ばれる理由</h2>
+            <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                <div style="margin-bottom: 40px;">
+                    <h3><i class="fa-solid fa-headset" style="color:var(--primary-color);"></i> 「困った」をすぐに解決。電話とメールで伴走します。</h3>
+                    <p>専門知識を持ったサポートデスクが、電話とメールで親切・丁寧に対応いたします。ツールの導入や運用で迷った際も安心です。</p>
                 </div>
-
-                <div class="plan-card bg-white p-8 rounded-3xl shadow-2xl border-t-8 border-orange-500 text-center transform scale-105 z-10">
-                    <h3 class="text-xl font-bold mb-2">プロ 10,000</h3>
-                    <div class="text-4xl font-black text-blue-600 mb-6">¥10,000 <span class="text-sm font-normal text-gray-400">/月</span></div>
-                    <ul class="text-left space-y-4 mb-8 text-sm">
-                        <li class="font-black text-blue-700"><i class="fas fa-wpforms mr-2"></i>フォーム数：100個</li>
-                        <li><i class="fas fa-users mr-2 text-blue-500"></i>登録アドレス：10,000</li>
-                    </ul>
-                    <a href="#" class="block w-full py-4 btn-trial text-white rounded-xl font-bold">申し込む</a>
+                <div style="margin-bottom: 40px;">
+                    <h3><i class="fa-solid fa-yen-sign" style="color:var(--primary-color);"></i> 月額6,300円（税抜）〜で、本格的なマーケティングを。</h3>
+                    <p>高額なMAツールに引けを取らない機能を圧倒的低価格でご提供。これまで予算で断念していた「自動追客」を、める配価格で実現できます。</p>
                 </div>
-
-                <div class="plan-card bg-white p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <h3 class="text-xl font-bold mb-2">プロ 20,000</h3>
-                    <div class="text-4xl font-black text-blue-600 mb-6">¥20,000 <span class="text-sm font-normal text-gray-400">/月</span></div>
-                    <ul class="text-left space-y-4 mb-8 text-sm">
-                        <li class="font-black text-blue-700"><i class="fas fa-wpforms mr-2"></i>フォーム数：200個</li>
-                        <li><i class="fas fa-users mr-2 text-blue-500"></i>登録アドレス：20,000</li>
-                    </ul>
-                    <a href="#" class="block w-full py-4 bg-slate-800 text-white rounded-xl font-bold">申し込む</a>
+                <div style="margin-bottom: 40px;">
+                    <h3><i class="fa-solid fa-shield-halved" style="color:var(--primary-color);"></i> 大切な顧客データを守る、強固な保護システム。</h3>
+                    <p>SSL通信暗号化や内部漏洩対策を徹底。プライバシーマーク取得企業として、最高水準のセキュリティ環境を維持しています。</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 60px;">
+                <p>大手導入企業・IT review 高評価実績</p>
+                <div class="logos">
+                    <span>[Company A]</span><span>[Company B]</span><span>[Company C]</span><span>[Company D]</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-xs text-gray-600">&copy; 2026 める配Pro. All Rights Reserved.</p>
+    <section id="price" class="pricing">
+        <div class="container">
+            <h2 class="section-title">料金プラン</h2>
+            <div class="price-box">月額 6,500円（税抜）〜</div>
+            <p>※初期費用：10,000円（税抜）〜</p>
+            <div style="margin-top: 40px;">
+                <a href="https://www.meruhaikun.com/trial/" class="btn btn-trial">＼まずは2週間お試し／<br>今すぐ無料で始める</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="mtg" style="padding: 80px 0; background: var(--primary-color); color: #fff; text-align: center;">
+        <div class="container">
+            <h2>機能や活用方法を詳しく知りたい方へ</h2>
+            <p>専門スタッフがオンラインにて個別にご相談を承ります。</p>
+            <a href="#" class="btn" style="background:#fff; color:var(--primary-color); padding: 20px 60px; font-size: 1.3rem;">オンラインMTGを予約する</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Delightful Inc. All Rights Reserved.</p>
         </div>
     </footer>
 
