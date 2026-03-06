@@ -6,17 +6,19 @@
     <title>める配プロプラン | 自動追客で「本顧客」へ導く</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         :root {
             --primary-blue: #4a82e8;
             --accent-orange: #f39800;
+            --header-blue: #5fb3e8;
+            --header-red: #e67a6a;
             --text-main: #333;
-            --step-bg: #f2f2f2;
         }
-        body { font-family: 'Noto Sans JP', sans-serif; margin: 0; padding: 0; color: var(--text-main); line-height: 1.5; background: #fff; }
+        body { font-family: 'Noto Sans JP', sans-serif; margin: 0; padding: 0; color: var(--text-main); line-height: 1.6; background: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-
-/* --- ヘッダー (image_dd3c49.png 再現) --- */
+        /* --- ヘッダー (image_dd3c49.png 再現) --- */
         .site-header {
             background: #fff;
             border-bottom: 1px solid #eee;
@@ -56,64 +58,38 @@
         .btn-login { background-color: var(--header-blue); }
         .btn-trial-head { background-color: var(--header-red); }
 
-
-
-
-        
-        /* --- ファーストビュー --- */
-        .fv { padding: 40px 20px; max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; }
-        
-        /* 左側：コピー & キャラクター */
-        .fv-left { flex: 1; min-width: 350px; padding-top: 20px; }
-        .fv-sub-copy { color: #d68500; font-weight: bold; font-size: 1rem; margin-bottom: 10px; }
-        .fv-main-copy { color: var(--primary-blue); font-size: 2.6rem; font-weight: bold; line-height: 1.2; margin-bottom: 20px; }
-        .fv-description { font-size: 1rem; color: #555; margin-bottom: 30px; }
-
-        .char-box { margin-bottom: 30px; }
-        .char-img { width: 140px; }
-
-        /* 右側：ステップフロー（画像再現） */
-        .fv-right { flex: 1.2; min-width: 500px; background: #fff; padding: 20px; }
-        .step-flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
-        
-        .step-label { grid-column: span 3; font-size: 0.85rem; font-weight: bold; color: #666; margin: 15px 0 5px; text-align: left; padding-left: 5px; }
-        .step-label:first-child { margin-top: 0; }
-
-        /* 縦列 */
-        .flow-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        
-        /* BOX要素 */
-        .box-form { background: var(--step-bg); border-radius: 8px; width: 100%; min-height: 50px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; }
-        .arrow-v { color: #ccc; font-size: 0.9rem; margin: 2px 0; }
-
-        /* メールスタック */
-        .mail-stack { display: flex; flex-direction: column; gap: 4px; width: 100%; }
-        .mail-box { padding: 8px; border-radius: 4px; color: #fff; font-size: 0.9rem; }
-        .m-blue { background: #4a82e8; }
-        .m-light { background: #eef5ff; color: #4a82e8; border: 1px solid #ddecff; }
-        .m-orange { background: #ff9933; }
-
-        /* 握手アイコン（代替） */
-        .success-icon { font-size: 2.5rem; margin-top: 10px; }
-        .icon-blue { color: #4a82e8; }
-        .icon-gray { color: #ddd; }
-        .icon-orange { color: #ff9933; }
-
-        /* CTAボタン */
-        .cta-group { display: flex; gap: 15px; margin-top: 20px; }
-        .btn-cta { flex: 1; padding: 18px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 1.1rem; text-align: center; border: none; transition: 0.2s; }
+        /* --- 各セクションのスタイル (これまでの統合) --- */
+        .fv { padding: 60px 0; display: flex; flex-wrap: wrap; }
+        .fv-left { flex: 1; min-width: 350px; }
+        .fv-right { flex: 1.2; min-width: 500px; }
+        .fv-main-copy { color: var(--primary-blue); font-size: 2.6rem; font-weight: bold; line-height: 1.2; }
+        .btn-cta { display: inline-block; padding: 18px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; text-align: center; transition: 0.2s; border: none; }
         .btn-primary { background: var(--primary-blue); color: #fff; }
         .btn-secondary { border: 2px solid var(--primary-blue); color: var(--primary-blue); background: #fff; }
-        .btn-cta:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        @media (max-width: 768px) {
-            .fv { flex-direction: column; }
-            .fv-left { min-width: 100%; text-align: center; }
-            .fv-right { min-width: 100%; padding: 20px 0; }
-            .fv-main-copy { font-size: 2rem; }
-            .cta-group { flex-direction: column; }
+        /* ステップ図解用 */
+        .step-flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
+        .box-form { background: #f2f2f2; border-radius: 8px; padding: 15px 5px; font-size: 0.75rem; font-weight: bold; }
+        .mail-box { padding: 8px; border-radius: 4px; color: #fff; margin-bottom: 4px; }
+        .m-blue { background: #4a82e8; }
+        .m-orange { background: #ff9933; }
+        .success-icon { font-size: 2.5rem; margin-top: 10px; }
+
+        /* --- フッター (image_dda560.png 再現) --- */
+        .site-footer { background-color: var(--header-blue); color: #fff; padding: 60px 0 30px; }
+        .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+        .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 3; }
+        .footer-links a { color: #fff; text-decoration: none; font-size: 14px; display: block; margin-bottom: 12px; }
+        .footer-info { flex: 2; font-size: 13px; line-height: 1.8; }
+
+        @media (max-width: 1024px) {
+            .header-nav { display: none; }
+            .fv-left, .fv-right { min-width: 100%; text-align: center; }
+            .footer-links { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
+
+    
 </head>
 <body>
 
